@@ -27,53 +27,50 @@ class SimStore
     }
   end
 
-def make_product_list
+  def make_product_list
+    
+    MAX_BOOKS.times do 
+    @product_list.push(generate_book)
+    end
+  end
 
-MAX_BOOKS.times do 
-@product_list.push(generate_book)
-end
-end
+  def daily_sales
+    sales_events = rand(0..100)
 
-def daily_sales
+    sales_events.times do 
+      @sales << {
+        product_sale_details: @product_list[rand(0..@product_list.length - 1)],
+        time: Time.new.strftime("%b %-d @%l:%m %P")
+      }
 
-sales_events = rand(0..100)
+    end
+    @sales
+  end
 
-sales_events.times do 
-@sales << {
-product_sale_details: @product_list[rand(0..@product_list.length - 1)],
-time: Time.new.strftime("%b %-d @%l:%m %P")
-}
+  def bestsellers
 
-end
-@sales
-end
+    @product_list.each do |product|
+      puts "Number of titles in stock at beginning of day: #{product[:stock]}"
+      count = 0
+        @sales.select {|k, v|
+          if k[:product_sale_details][:sku] == product[:sku]
+            count += 1
+            product[:stock] -= 1
+          end
+        }
 
-def bestsellers
+      puts "End of day report: sku # #{product[:sku]} of title: \"#{product[:title].capitalize.gsub(/_/, " ")}\" sold #{count} copies @ $#{product[:price]} each. #{product[:stock]} remain in stock.\n-----------------"
 
-@product_list.each do |product|
-puts "Number of titles in stock at beginning of day: #{product[:stock]}"
-count = 0
-@sales.select {|k, v|
-if k[:product_sale_details][:sku] == product[:sku]
-count += 1
-product[:stock] -= 1
-end
-}
+      @products_sold << {sku: product[:sku], title: product[:title], sold: count}
+      @products_sold.sort_by!{|x| x[:sold] }.reverse!  
+    end
+  end
 
-puts "End of day report: sku # #{product[:sku]} of title: \"#{product[:title].capitalize.gsub(/_/, " ")}\" sold #{count} copies @ $#{product[:price]} each. #{product[:stock]} remain in stock.\n-----------------"
-
-@products_sold << {sku: product[:sku], title: product[:title], sold: count}
-@products_sold.sort_by!{|x| x[:sold] }.reverse!  
-end
-end
-
-def test
-make_product_list
-daily_sales 
-bestsellers
-end
-
-
+  def test
+    make_product_list
+    daily_sales 
+    bestsellers
+  end
 
 end
 
