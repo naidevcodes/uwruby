@@ -16,7 +16,7 @@ class TimeShift
 		total_min = xtra_hours + (hh * 60) + mm
 
 		meridian = 
-		 (total_min.between?(720, 1439)) ? "PM" : "AM"
+			(total_min.between?(720, 1439)) ? "PM" : "AM"
 
 		while mm > 59
 			hh += 1 
@@ -27,10 +27,11 @@ class TimeShift
 
 			end
 		end
-    
-    printf "%d:%02d %s", hh, mm, meridian
+
+		printf "%d:%02d %s", hh, mm, meridian
 
 	end
+	
 end
 
 # puts TimeShift.new("11:50 PM", 60).add_time
