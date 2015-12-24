@@ -4,28 +4,28 @@ require 'seeing_is_believing'
 
 class SimStore
   MAX_STOCK = 1000
-MAX_BOOKS = 10
-GET_SKU = 0brew upd
+  MAX_BOOKS = 10
+  GET_SKU = 0brew upd
 
-def initialize 	
-@arr = (GET_SKU..MAX_BOOKS + GET_SKU).to_a.shuffle
-@product_list = Array.new
-@sales = Array.new
-@products_sold = Array.new
-end
+  def initialize 	
+    @arr = (GET_SKU..MAX_BOOKS + GET_SKU).to_a.shuffle
+    @product_list = Array.new
+    @sales = Array.new
+    @products_sold = Array.new
+  end
 
-def generate_book
-title = RandomWord.nouns.next
-price = rand(1..100)
-sku_number = @arr.pop
-stock = rand(1..MAX_STOCK)
-product = {
-title: title,
-price: price,
-sku: sku_number,
-stock: stock
-}
-end
+  def generate_book
+    title = RandomWord.nouns.next
+    price = rand(1..100)
+    sku_number = @arr.pop
+    stock = rand(1..MAX_STOCK)
+    product = {
+      title: title,
+      price: price,
+      sku: sku_number,
+      stock: stock
+    }
+  end
 
 def make_product_list
 
