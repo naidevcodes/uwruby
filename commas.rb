@@ -7,3 +7,5 @@ end
 puts commas(-123456)
 puts commas(7261716238172681723)
 puts commas(9826391617236123)
+
+# Having difficulties dealing with negative numbers
