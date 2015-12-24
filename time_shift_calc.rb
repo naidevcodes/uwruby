@@ -31,7 +31,7 @@ class TimeShift
 		printf "%d:%02d %s", hh, mm, meridian
 
 	end
-	
+
 end
 
 # puts TimeShift.new("11:50 PM", 60).add_time
