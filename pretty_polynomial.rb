@@ -1,4 +1,5 @@
 class Polynomials
+
   def initialize coefficient
     @coefficient = coefficient
     @ugly_polynom = String.new
@@ -6,20 +7,11 @@ class Polynomials
 
   def ugly_output 
     exponent = @coefficient.length - 1
-		
-		@coefficient.each do |i|
-			unless i == 0
-			  @ugly_polynom += "#{i}x^#{exponent}+"
-				exponent -= 1
-			end
-		end
-  def ugly_output 
-    exponent = @coefficient.length - 1
-    
+
     @coefficient.each do |i|
       unless i == 0
         @ugly_polynom += "#{i}x^#{exponent}+"
-	exponent -= 1
+        exponent -= 1
       end
     end
     @ugly_polynom
@@ -33,6 +25,5 @@ class Polynomials
 end
 
 polynom = Polynomials.new [1, -3, -4, 1, 0, 6]
-
 
 print polynom.make_pretty
