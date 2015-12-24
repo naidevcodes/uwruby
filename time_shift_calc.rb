@@ -1,6 +1,6 @@
 class TimeShift 
 
-	def initialize time, min
+  def initialize time, min
 		@time = time.split(/[:\s]/)
 		@min = min
 	end
