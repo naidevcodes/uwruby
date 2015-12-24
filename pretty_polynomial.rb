@@ -1,15 +1,11 @@
-
 class Polynomials
-	
   def initialize coefficient
     @coefficient = coefficient
     @ugly_polynom = String.new
   end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	def ugly_output 
-		exponent = @coefficient.length - 1
+  def ugly_output 
+    exponent = @coefficient.length - 1
 		
 		@coefficient.each do |i|
 			unless i == 0
@@ -17,9 +13,6 @@ class Polynomials
 				exponent -= 1
 			end
 		end
-=======
-=======
->>>>>>> 8051fa9f757be8a1ee9c363de4ab975ee7bb0f16
   def ugly_output 
     exponent = @coefficient.length - 1
     
@@ -29,10 +22,6 @@ class Polynomials
 	exponent -= 1
       end
     end
-<<<<<<< HEAD
->>>>>>> 8051fa9f757be8a1ee9c363de4ab975ee7bb0f16
-=======
->>>>>>> 8051fa9f757be8a1ee9c363de4ab975ee7bb0f16
     @ugly_polynom
   end
 
