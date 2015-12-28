@@ -7,17 +7,10 @@ require 'db_active_record_connection'
 require 'byebug'
 
 
-
-
-
-
-
 class SimStore
   MAX_STOCK = 1000
   MAX_BOOKS = 10
   GET_SKU = 0
-
-
 
   def initialize
     @sales_events = rand(0..100)
@@ -26,8 +19,6 @@ class SimStore
     @sales = Array.new
     @products_sold = Array.new
   end
-
-
 
   def generate_book
     title = RandomWord.adjs.next
@@ -42,8 +33,6 @@ class SimStore
     }
   end
 
-
-
   def products_to_db
     MAX_BOOKS.times do
       product = generate_book
@@ -51,8 +40,6 @@ class SimStore
       products = Product.create(title: product[:title], vendor_id: vendor_id, price: product[:price], stock: product[:stock])
     end
   end
-
-
 
   def sales_to_db
     @sales_events.times do
@@ -66,38 +53,28 @@ class SimStore
     end
   end
 
-
-
   def sales_list(start_date, end_date)
     Sale.where(created_at: start_date..end_date).each do |sale|
       sale
     end
   end
 
-
-
   def total_revenues(start_date, end_date)
     Sale.where(created_at: start_date..end_date).sum(:revenue)
     end
-
-
 
   def items_to_replenish(minimum_stock)
     Product.where(stock: 0..minimum_stock).select  {|product| product.stock < minimum_stock}
   end
 
-
-
-  def promotions
+  def promotions # doesn't work
     promos_applied = 0.25
     promos_arr = ["3 for 2", "2 for 1", "2nd item 1/2 off"]
-
     promo_count = ((promos_arr.count/promos_applied) - promos_arr.count)
 
     (1..promo_count).each do
       promos_arr.push("No promo")
     end
-
     promos_arr.sample
   end
 
@@ -110,11 +87,7 @@ class SimStore
 #     puts promotions
   end
 
-
 end
-
-
-
 
 
 
@@ -124,47 +97,32 @@ class DbManager
     "sales", "products", "employees", "vendors"
     ]
 
-
-
-
   def use_simstore_to
     simstore = SimStore.new
     @add_products_to_db = simstore.products_to_db
     @add_sales_to_db = simstore.sales_to_db
   end
 
-
-
   def clean_database
     TABLES.each{ |table_name| clean_table(table_name) }
   end
-
-
 
   def clean_table(table_name)
     table_name.singularize.camelize.constantize.delete_all
   end
 
-
-
   def populate_table(table_name)
     TABLES.reverse.each {|table| eval("#{table}")}
   end
-
-
 
   def populate_tables
     TABLES.reverse.each {|table_name| populate_table(table_name)}
   end
 
-
-
   def products
     use_simstore_to
     @add_products_to_db
   end
-
-
 
   def vendors
     5.times do
@@ -172,14 +130,10 @@ class DbManager
     end
   end
 
-
-
   def sales
     use_simstore_to
     @add_sales_to_db
   end
-
-
 
   def employees
     10.times do
@@ -187,12 +141,9 @@ class DbManager
     end
   end
 
-
-
   def test
 
   end
-
 
 end
 
