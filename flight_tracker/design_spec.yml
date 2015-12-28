@@ -1,0 +1,9 @@
+entry_altitude: 10000
+downward_alt_slant: 9200
+dist_maintained_btwn_aircrafts: 5200
+stndrd_dscnt_trajectory: 65291
+dscnt_speed_max: 128
+dscnt_speed_min: 105
+fa_distance: 15021
+fa_strting_altitude: 800
+landing_speed: 70
